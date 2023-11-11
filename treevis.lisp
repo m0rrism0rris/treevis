@@ -1,10 +1,12 @@
+;gnu clisp  2.49.60
+
 (defconstant +box-light+ " ╴╷┐╶─┌┬╵┘│┤└┴├┼")
 
 (defmethod extract-dat ((object list)) object
   (loop for i in object collect
         (if (or (listp i) (vectorp i)) (extract-dat i) i)))
 
-(defmethod extract-dat ((object simple-array)
+(defmethod extract-dat ((object array)
                         &aux (w (array-dimension object 1)))
   (loop for i below (array-dimension object 0) collect
         (loop for j below w collect (aref object i j))))
@@ -87,4 +89,3 @@
 
 ;;(defparameter *q* (make-treechar '(" a  " " b  " " c  ")))
 ;;(print-treechar (merge-horiz t *q* *q* *q* (merge-horiz t *q* *q*)))
-
